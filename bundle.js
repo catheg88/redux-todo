@@ -11249,9 +11249,9 @@ var _store = __webpack_require__(225);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _ButtonsContainer = __webpack_require__(229);
+var _AddNewContainer = __webpack_require__(236);
 
-var _ButtonsContainer2 = _interopRequireDefault(_ButtonsContainer);
+var _AddNewContainer2 = _interopRequireDefault(_AddNewContainer);
 
 var _TodosContainer = __webpack_require__(232);
 
@@ -11270,7 +11270,7 @@ var Root = function Root() {
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(_ButtonsContainer2.default, null),
+      _react2.default.createElement(_AddNewContainer2.default, null),
       _react2.default.createElement(_TodosContainer2.default, null)
     )
   );
@@ -24817,28 +24817,28 @@ var Reducer = function Reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
-  console.log('---reducing with action---');
+  console.log('action');
   console.log(action);
+
+  var newState = Object.assign({}, state);
+  newState.todos = state.todos.map(function (i) {
+    return i;
+  });
 
   switch (action.type) {
     case _actions2.default.RESET:
       counter = 0;
-      return { todos: [] };
+      newState.todos = [];
+      return newState;
     case _actions2.default.ADD_TODO:
       counter += 1;
 
       var newTodo = Object.assign({}, action.todo, {
         id: counter
       });
+      newState.todos.push(newTodo);
+      return newState;
 
-      var newTodos = state.todos.map(function (todo) {
-        return todo;
-      });
-      newTodos.push(newTodo);
-
-      return Object.assign({}, state, {
-        todos: newTodos
-      });
     case _actions2.default.DELETE_TODO:
       var newTodos = [];
       state.todos.forEach(function (todo) {
@@ -24846,9 +24846,8 @@ var Reducer = function Reducer() {
           newTodos.push(todo);
         }
       });
-      return Object.assign({}, state, {
-        todos: newTodos
-      });
+      newState.todos = newTodos;
+      return newState;
     case _actions2.default.TOGGLE_TODO:
       var newTodos = state.todos.map(function (todo) {
         if (action.id === todo.id) {
@@ -24858,12 +24857,10 @@ var Reducer = function Reducer() {
         }
         return todo;
       });
-
-      return Object.assign({}, state, {
-        todos: newTodos
-      });
+      newState.todos = newTodos;
+      return newState;
     default:
-      return state;
+      return newState;
   }
 };
 
@@ -24891,126 +24888,8 @@ exports.default = Actions;
 
 /***/ }),
 /* 228 */,
-/* 229 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactRedux = __webpack_require__(197);
-
-var _actions = __webpack_require__(227);
-
-var _actions2 = _interopRequireDefault(_actions);
-
-var _buttons = __webpack_require__(230);
-
-var _buttons2 = _interopRequireDefault(_buttons);
-
-var _store = __webpack_require__(225);
-
-var _store2 = _interopRequireDefault(_store);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    reset: function reset() {
-      return dispatch({
-        type: _actions2.default.RESET
-      });
-    },
-    add: function add(text) {
-      return dispatch({
-        type: _actions2.default.ADD_TODO,
-        todo: {
-          text: text,
-          completed: false
-        }
-      });
-    }
-  };
-};
-
-var ButtonsContainer = (0, _reactRedux.connect)(null, mapDispatchToProps)(_buttons2.default);
-
-exports.default = ButtonsContainer;
-
-/***/ }),
-/* 230 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(32);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Buttons = function (_React$Component) {
-  _inherits(Buttons, _React$Component);
-
-  function Buttons() {
-    _classCallCheck(this, Buttons);
-
-    return _possibleConstructorReturn(this, (Buttons.__proto__ || Object.getPrototypeOf(Buttons)).apply(this, arguments));
-  }
-
-  _createClass(Buttons, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'form',
-          { onSubmit: function onSubmit(e) {
-              e.preventDefault();
-              _this2.props.add(newTodoText.value);
-              newTodoText.value = '';
-            } },
-          _react2.default.createElement('input', { id: 'newTodoText' }),
-          _react2.default.createElement(
-            'button',
-            { type: 'submit' },
-            'Add new'
-          )
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.props.reset },
-          'reset'
-        )
-      );
-    }
-  }]);
-
-  return Buttons;
-}(_react2.default.Component);
-
-exports.default = Buttons;
-
-/***/ }),
+/* 229 */,
+/* 230 */,
 /* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25045,74 +24924,45 @@ var Todos = function (_React$Component) {
   }
 
   _createClass(Todos, [{
+    key: 'strike',
+    value: function strike(todoCompletion) {
+      return todoCompletion ? { textDecoration: 'line-through' } : {};
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
-        'ul',
+        'ol',
         null,
-        this.props.todos.map(function (todo) {
-          if (todo.completed === true) {
-            return _react2.default.createElement(
-              'li',
-              null,
-              _react2.default.createElement(
-                'span',
-                {
-                  onClick: function onClick() {
-                    return _this2.props.toggleComplete(todo.id);
-                  },
-                  style: { textDecoration: 'line-through' }
+        this.props.todos.map(function (todo, key) {
+          return _react2.default.createElement(
+            'li',
+            { key: key },
+            _react2.default.createElement(
+              'span',
+              {
+                onClick: function onClick() {
+                  return _this2.props.toggleComplete(todo.id);
                 },
-                todo.text
-              ),
-              _react2.default.createElement(
-                'span',
-                null,
-                ' - '
-              ),
-              _react2.default.createElement(
-                'span',
-                null,
-                _react2.default.createElement(
-                  'button',
-                  { onClick: function onClick() {
-                      return _this2.props.delete(todo.id);
-                    } },
-                  'remove todo'
-                )
-              )
-            );
-          } else {
-            return _react2.default.createElement(
-              'li',
+                style: _this2.strike(todo.completed)
+              },
+              todo.text
+            ),
+            _react2.default.createElement(
+              'span',
               null,
-              _react2.default.createElement(
-                'span',
-                { onClick: function onClick() {
-                    return _this2.props.toggleComplete(todo.id);
-                  } },
-                todo.text
-              ),
-              _react2.default.createElement(
-                'span',
-                null,
-                ' - '
-              ),
-              _react2.default.createElement(
-                'span',
-                null,
-                _react2.default.createElement(
-                  'button',
-                  { onClick: function onClick() {
-                      return _this2.props.delete(todo.id);
-                    } },
-                  'remove todo'
-                )
-              )
-            );
-          }
+              ' - '
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this2.props.delete(todo.id);
+                } },
+              'remove todo'
+            )
+          );
         })
       );
     }
@@ -25172,6 +25022,128 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var TodosContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Todos2.default);
 
 exports.default = TodosContainer;
+
+/***/ }),
+/* 233 */,
+/* 234 */,
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(32);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AddNew = function (_React$Component) {
+  _inherits(AddNew, _React$Component);
+
+  function AddNew() {
+    _classCallCheck(this, AddNew);
+
+    return _possibleConstructorReturn(this, (AddNew.__proto__ || Object.getPrototypeOf(AddNew)).apply(this, arguments));
+  }
+
+  _createClass(AddNew, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          { onSubmit: function onSubmit(e) {
+              e.preventDefault();
+              _this2.props.add(newTodoText.value);
+              newTodoText.value = '';
+            } },
+          _react2.default.createElement('input', { id: 'newTodoText' }),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            'Add new todo'
+          )
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.props.reset },
+          'reset'
+        )
+      );
+    }
+  }]);
+
+  return AddNew;
+}(_react2.default.Component);
+
+exports.default = AddNew;
+
+/***/ }),
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(197);
+
+var _actions = __webpack_require__(227);
+
+var _actions2 = _interopRequireDefault(_actions);
+
+var _AddNew = __webpack_require__(235);
+
+var _AddNew2 = _interopRequireDefault(_AddNew);
+
+var _store = __webpack_require__(225);
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    reset: function reset() {
+      return dispatch({
+        type: _actions2.default.RESET
+      });
+    },
+    add: function add(text) {
+      return dispatch({
+        type: _actions2.default.ADD_TODO,
+        todo: {
+          text: text,
+          completed: false
+        }
+      });
+    }
+  };
+};
+
+var AddNewContainer = (0, _reactRedux.connect)(null, mapDispatchToProps)(_AddNew2.default);
+
+exports.default = AddNewContainer;
 
 /***/ })
 /******/ ]);

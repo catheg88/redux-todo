@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Buttons extends React.Component {
+class AddNew extends React.Component {
 
   render() {
     return (
@@ -12,7 +12,7 @@ class Buttons extends React.Component {
           }
         }>
           <input id="newTodoText"></input>
-          <button type="submit">Add new</button>
+          <button type="submit">Add new todo</button>
         </form>
         <button onClick={this.props.reset}>reset</button>
       </div>
@@ -20,4 +20,4 @@ class Buttons extends React.Component {
   }
 }
 
-export default Buttons
+export default AddNew

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Actions from '../actions'
-import Buttons from './buttons'
+import AddNew from './AddNew'
 import Store from '../store'
 
 const mapDispatchToProps = ( dispatch ) => {
@@ -19,9 +19,9 @@ const mapDispatchToProps = ( dispatch ) => {
   }
 }
 
-const ButtonsContainer = connect(
+const AddNewContainer = connect(
   null,
   mapDispatchToProps
-)(Buttons)
+)(AddNew)
 
-export default ButtonsContainer
+export default AddNewContainer

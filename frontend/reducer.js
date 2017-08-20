@@ -7,26 +7,26 @@ const initialState = {
 let counter = 0
 
 const Reducer = ( state = initialState, action ) => {
-  console.log('---reducing with action---')
+  console.log('action')
   console.log(action)
+
+    let newState = Object.assign({}, state)
+    newState.todos = state.todos.map( i => i )
 
   switch(action.type) {
     case Actions.RESET:
       counter = 0
-      return { todos: [] }
+      newState.todos = []
+      return newState
     case Actions.ADD_TODO:
       counter += 1
 
       var newTodo = Object.assign({}, action.todo, {
         id: counter
       })
+      newState.todos.push(newTodo)
+      return newState
 
-      var newTodos = state.todos.map( todo => todo )
-      newTodos.push(newTodo)
-
-      return Object.assign({}, state, {
-        todos: newTodos
-      })
     case Actions.DELETE_TODO:
       var newTodos = []
       state.todos.forEach( todo => {
@@ -34,9 +34,8 @@ const Reducer = ( state = initialState, action ) => {
           newTodos.push(todo)
         }
       })
-      return Object.assign({}, state, {
-        todos: newTodos
-      })
+      newState.todos = newTodos
+      return newState
     case Actions.TOGGLE_TODO:
       var newTodos = state.todos.map( todo => {
         if (action.id === todo.id) {
@@ -46,12 +45,10 @@ const Reducer = ( state = initialState, action ) => {
         }
         return todo
       })
-
-      return Object.assign({}, state, {
-        todos: newTodos
-      })
+      newState.todos = newTodos
+      return newState
     default:
-      return state
+      return newState
   }
 }
 

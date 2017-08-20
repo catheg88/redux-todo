@@ -4,14 +4,14 @@ import { Provider } from 'react-redux'
 
 import Store from './store'
 
-import ButtonsContainer from './components/ButtonsContainer'
+import AddNewContainer from './components/AddNewContainer'
 import TodosContainer from './components/TodosContainer'
 import Todos from './components/Todos'
 
 const Root = () => (
   <Provider store={Store}>
     <div>
-      <ButtonsContainer />
+      <AddNewContainer />
       <TodosContainer />
     </div>
   </Provider>
