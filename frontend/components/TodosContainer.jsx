@@ -10,18 +10,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = ( dispatch ) => {
   return ({
-    toggleComplete: id => {
-      dispatch({
-        type: Actions.TOGGLE_TODO,
-        id: id
-      })
-    },
-    delete: id => {
-      dispatch({
-        type: Actions.DELETE_TODO,
-        id: id
-      })
-    }
+    toggleComplete: id => dispatch( Actions.TOGGLE_TODO(id) ),
+    delete: id => dispatch( Actions.DELETE_TODO(id) )
   })
 }
 

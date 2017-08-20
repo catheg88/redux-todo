@@ -5,17 +5,8 @@ import Store from '../store'
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
-    reset: () => dispatch({
-      type: Actions.RESET
-    }),
-    add: (text) => {
-      return (dispatch({
-      type: Actions.ADD_TODO,
-      todo: {
-        text: text,
-        completed: false
-      }
-    }))}
+    reset: () => dispatch( Actions.RESET() ),
+    add: text => dispatch( Actions.ADD_TODO(text) )
   }
 }
 

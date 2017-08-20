@@ -24817,7 +24817,6 @@ var Reducer = function Reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
-  console.log('action');
   console.log(action);
 
   var newState = Object.assign({}, state);
@@ -24826,11 +24825,11 @@ var Reducer = function Reducer() {
   });
 
   switch (action.type) {
-    case _actions2.default.RESET:
+    case 'RESET':
       counter = 0;
       newState.todos = [];
       return newState;
-    case _actions2.default.ADD_TODO:
+    case 'ADD_TODO':
       counter += 1;
 
       var newTodo = Object.assign({}, action.todo, {
@@ -24839,7 +24838,7 @@ var Reducer = function Reducer() {
       newState.todos.push(newTodo);
       return newState;
 
-    case _actions2.default.DELETE_TODO:
+    case 'DELETE_TODO':
       var newTodos = [];
       state.todos.forEach(function (todo) {
         if (action.id !== todo.id) {
@@ -24848,7 +24847,7 @@ var Reducer = function Reducer() {
       });
       newState.todos = newTodos;
       return newState;
-    case _actions2.default.TOGGLE_TODO:
+    case 'TOGGLE_TODO':
       var newTodos = state.todos.map(function (todo) {
         if (action.id === todo.id) {
           return Object.assign({}, todo, {
@@ -24878,10 +24877,32 @@ Object.defineProperty(exports, "__esModule", {
 });
 var Actions = {
   SET_VISIBILITY_FILTER: 'SET_VISIBILITY_FILTER',
-  ADD_TODO: 'ADD_TODO',
-  DELETE_TODO: 'DELETE_TODO',
-  TOGGLE_TODO: 'TOGGLE_TODO',
-  RESET: 'RESET'
+  ADD_TODO: function ADD_TODO(text) {
+    return {
+      type: 'ADD_TODO',
+      todo: {
+        text: text,
+        completed: false
+      }
+    };
+  },
+  DELETE_TODO: function DELETE_TODO(id) {
+    return {
+      type: 'DELETE_TODO',
+      id: id
+    };
+  },
+  TOGGLE_TODO: function TOGGLE_TODO(id) {
+    return {
+      type: 'TOGGLE_TODO',
+      id: id
+    };
+  },
+  RESET: function RESET() {
+    return {
+      type: 'RESET'
+    };
+  }
 };
 
 exports.default = Actions;
@@ -25005,16 +25026,10 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     toggleComplete: function toggleComplete(id) {
-      dispatch({
-        type: _actions2.default.TOGGLE_TODO,
-        id: id
-      });
+      return dispatch(_actions2.default.TOGGLE_TODO(id));
     },
     delete: function _delete(id) {
-      dispatch({
-        type: _actions2.default.DELETE_TODO,
-        id: id
-      });
+      return dispatch(_actions2.default.DELETE_TODO(id));
     }
   };
 };
@@ -25125,18 +25140,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     reset: function reset() {
-      return dispatch({
-        type: _actions2.default.RESET
-      });
+      return dispatch(_actions2.default.RESET());
     },
     add: function add(text) {
-      return dispatch({
-        type: _actions2.default.ADD_TODO,
-        todo: {
-          text: text,
-          completed: false
-        }
-      });
+      return dispatch(_actions2.default.ADD_TODO(text));
     }
   };
 };
