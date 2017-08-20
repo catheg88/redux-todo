@@ -2,20 +2,29 @@ import React from 'react'
 
 class Todos extends React.Component {
 
-  strike(todoCompletion) {
-    return todoCompletion ? {textDecoration: 'line-through'} : {}
-  }
-
   render() {
+    let visibleTodos
+    if (this.props.filter === 'All') {
+      visibleTodos = this.props.todos
+    }
+
+    if (this.props.filter === 'Completed') {
+      visibleTodos = this.props.todos.filter( todo => (todo.completed === true) )
+    }
+
+    if (this.props.filter === 'Todo') {
+      visibleTodos = this.props.todos.filter( todo => (todo.completed === false) )
+    }
+
     return(
       <ol>
-        {this.props.todos.map( (todo, key) => (
+        {visibleTodos.map( (todo, key) => (
           <li key={key}>
             <span
               onClick={() => this.props.toggleComplete(todo.id)}
-              style={this.strike(todo.completed)}
+              style={{textDecoration: todo.completed ? 'line-through' : 'none'}}
             >{todo.text}</span><span> - </span>
-            <button onClick={() => this.props.delete(todo.id)}>remove todo</button>
+          <a href="#" style={{ color: 'blue' }} onClick={() => this.props.delete(todo.id)}>remove todo</a>
           </li>
         ))}
       </ol>

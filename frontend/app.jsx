@@ -4,15 +4,16 @@ import { Provider } from 'react-redux'
 
 import Store from './store'
 
-import AddNewContainer from './components/AddNewContainer'
+import ButtonsContainer from './components/ButtonsContainer'
 import TodosContainer from './components/TodosContainer'
-import Todos from './components/Todos'
+import ResetContainer from './components/ResetContainer'
 
 const Root = () => (
   <Provider store={Store}>
     <div>
-      <AddNewContainer />
+      <ButtonsContainer />
       <TodosContainer />
+      <ResetContainer />
     </div>
   </Provider>
 )
@@ -23,4 +24,3 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 window.Store = Store
-window.Todos = Todos

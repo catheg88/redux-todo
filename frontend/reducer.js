@@ -1,7 +1,8 @@
 import Actions from './actions'
 
 const initialState = {
-  todos: []
+  todos: [],
+  filter: 'All'
 }
 
 let counter = 0
@@ -13,6 +14,26 @@ const Reducer = ( state = initialState, action ) => {
   newState.todos = state.todos.map( i => i )
 
   switch(action.type) {
+    case 'SET_FILTER':
+      let filterDisplayName
+
+      console.log('action.filter: ')
+      console.log(action.filter)
+
+      switch(action.filter) {
+        case('ALL'):
+          filterDisplayName = "All"
+          break
+        case('TODO'):
+          filterDisplayName = "Todo"
+          break
+        case('COMPLETED'):
+          filterDisplayName = "Completed"
+          break
+      }
+      newState.filter = filterDisplayName
+      return newState
+
     case 'RESET':
       counter = 0
       newState.todos = []
