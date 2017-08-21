@@ -25047,7 +25047,7 @@ var Buttons = function (_React$Component) {
           _react2.default.createElement(
             'a',
             { href: '#',
-              style: { textDecoration: this.props.filter === 'All' ? 'underline' : 'none' },
+              className: this.props.filter === 'All' ? 'active' : '',
               onClick: function onClick() {
                 return _this2.props.setFilter('ALL');
               } },
@@ -25061,7 +25061,7 @@ var Buttons = function (_React$Component) {
           _react2.default.createElement(
             'a',
             { href: '#',
-              style: { textDecoration: this.props.filter === 'Completed' ? 'underline' : 'none' },
+              className: this.props.filter === 'Completed' ? 'active' : '',
               onClick: function onClick() {
                 return _this2.props.setFilter('COMPLETED');
               } },
@@ -25075,7 +25075,7 @@ var Buttons = function (_React$Component) {
           _react2.default.createElement(
             'a',
             { href: '#',
-              style: { textDecoration: this.props.filter === 'Todo' ? 'underline' : 'none' },
+              className: this.props.filter === 'Todo' ? 'active' : '',
               onClick: function onClick() {
                 return _this2.props.setFilter('TODO');
               } },

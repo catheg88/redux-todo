@@ -17,15 +17,15 @@ class Buttons extends React.Component {
         <div>Set visibility filter:
           <span> </span>
           <a href="#"
-            style={{textDecoration: ( this.props.filter === 'All' ) ? 'underline' : 'none' }}
+            className={this.props.filter === 'All' ? 'active' : ''}
             onClick={() => this.props.setFilter('ALL')}>All</a>
           <span> </span>
           <a href="#"
-            style={{textDecoration: ( this.props.filter === 'Completed' ) ? 'underline' : 'none' }}
+            className={this.props.filter === 'Completed' ? 'active' : ''}
             onClick={() => this.props.setFilter('COMPLETED')}>Completed</a>
           <span> </span>
           <a href="#"
-            style={{textDecoration: ( this.props.filter === 'Todo' ) ? 'underline' : 'none' }}
+            className={this.props.filter === 'Todo' ? 'active' : ''}
             onClick={() => this.props.setFilter('TODO')}>Todo</a>
         </div>
       </div>

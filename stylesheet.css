@@ -14,10 +14,14 @@ li {
   display: inline-flex;
   word-wrap: break-word;
   padding-right: 30px;
-  width: 50%;
+  width: 40%;
 }
 
 .RemoveLink {
   color: red;
   flex-wrap: nowrap;
+}
+
+.active {
+  font-weight: bold;
 }
