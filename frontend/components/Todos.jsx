@@ -17,17 +17,18 @@ class Todos extends React.Component {
     }
 
     return(
-      <ol>
+      <ul>
         {visibleTodos.map( (todo, key) => (
           <li key={key}>
-            <span
+            <span className="TodoItem"
               onClick={() => this.props.toggleComplete(todo.id)}
               style={{textDecoration: todo.completed ? 'line-through' : 'none'}}
-            >{todo.text}</span><span> - </span>
-          <a href="#" style={{ color: 'blue' }} onClick={() => this.props.delete(todo.id)}>remove todo</a>
+            >{todo.text}
+          </span>
+          <a className="RemoveLink" href="#" onClick={() => this.props.delete(todo.id)}>remove todo</a>
           </li>
         ))}
-      </ol>
+      </ul>
     )
   }
 }

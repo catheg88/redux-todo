@@ -25038,12 +25038,6 @@ var Buttons = function (_React$Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Current visibility filter: ',
-          this.props.filter
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
           'Set visibility filter:',
           _react2.default.createElement(
             'span',
@@ -25052,7 +25046,9 @@ var Buttons = function (_React$Component) {
           ),
           _react2.default.createElement(
             'a',
-            { href: '#', style: { color: 'blue' }, onClick: function onClick() {
+            { href: '#',
+              style: { textDecoration: this.props.filter === 'All' ? 'underline' : 'none' },
+              onClick: function onClick() {
                 return _this2.props.setFilter('ALL');
               } },
             'All'
@@ -25064,7 +25060,9 @@ var Buttons = function (_React$Component) {
           ),
           _react2.default.createElement(
             'a',
-            { href: '#', style: { color: 'blue' }, onClick: function onClick() {
+            { href: '#',
+              style: { textDecoration: this.props.filter === 'Completed' ? 'underline' : 'none' },
+              onClick: function onClick() {
                 return _this2.props.setFilter('COMPLETED');
               } },
             'Completed'
@@ -25076,7 +25074,9 @@ var Buttons = function (_React$Component) {
           ),
           _react2.default.createElement(
             'a',
-            { href: '#', style: { color: 'blue' }, onClick: function onClick() {
+            { href: '#',
+              style: { textDecoration: this.props.filter === 'Todo' ? 'underline' : 'none' },
+              onClick: function onClick() {
                 return _this2.props.setFilter('TODO');
               } },
             'Todo'
@@ -25193,7 +25193,7 @@ var Todos = function (_React$Component) {
       }
 
       return _react2.default.createElement(
-        'ol',
+        'ul',
         null,
         visibleTodos.map(function (todo, key) {
           return _react2.default.createElement(
@@ -25201,7 +25201,7 @@ var Todos = function (_React$Component) {
             { key: key },
             _react2.default.createElement(
               'span',
-              {
+              { className: 'TodoItem',
                 onClick: function onClick() {
                   return _this2.props.toggleComplete(todo.id);
                 },
@@ -25210,13 +25210,8 @@ var Todos = function (_React$Component) {
               todo.text
             ),
             _react2.default.createElement(
-              'span',
-              null,
-              ' - '
-            ),
-            _react2.default.createElement(
               'a',
-              { href: '#', style: { color: 'blue' }, onClick: function onClick() {
+              { className: 'RemoveLink', href: '#', onClick: function onClick() {
                   return _this2.props.delete(todo.id);
                 } },
               'remove todo'

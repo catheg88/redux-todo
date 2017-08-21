@@ -14,14 +14,19 @@ class Buttons extends React.Component {
           <input id="newTodoText"></input>
           <button type="submit">Add new todo</button>
         </form>
-        <div>Current visibility filter: {this.props.filter}</div>
         <div>Set visibility filter:
           <span> </span>
-          <a href="#" style={{ color: 'blue' }} onClick={() => this.props.setFilter('ALL')}>All</a>
+          <a href="#"
+            style={{textDecoration: ( this.props.filter === 'All' ) ? 'underline' : 'none' }}
+            onClick={() => this.props.setFilter('ALL')}>All</a>
           <span> </span>
-          <a href="#" style={{ color: 'blue' }} onClick={() => this.props.setFilter('COMPLETED')}>Completed</a>
+          <a href="#"
+            style={{textDecoration: ( this.props.filter === 'Completed' ) ? 'underline' : 'none' }}
+            onClick={() => this.props.setFilter('COMPLETED')}>Completed</a>
           <span> </span>
-          <a href="#" style={{ color: 'blue' }} onClick={() => this.props.setFilter('TODO')}>Todo</a>
+          <a href="#"
+            style={{textDecoration: ( this.props.filter === 'Todo' ) ? 'underline' : 'none' }}
+            onClick={() => this.props.setFilter('TODO')}>Todo</a>
         </div>
       </div>
     )

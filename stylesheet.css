@@ -1,0 +1,23 @@
+html {
+  /*font-family: 'Droid Sans', sans-serif;*/
+}
+
+a {
+  color: green;
+}
+
+li {
+  margin-right: 20px;
+}
+
+.TodoItem {
+  display: inline-flex;
+  word-wrap: break-word;
+  padding-right: 30px;
+  width: 50%;
+}
+
+.RemoveLink {
+  color: red;
+  flex-wrap: nowrap;
+}
